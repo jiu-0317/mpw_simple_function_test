@@ -1,0 +1,261 @@
+
+##### MyChip_FP_MAC smoke test  chip=chip01  i_clk=100000 Hz  T_half=81 us  gap=321 us  invert=True #####
+
+[T0] 리셋 후 출력 확인
+T0  after reset    tx=  ----  rx=0x0000 (exp 0x0000)  done=0 (exp 0)  PASS
+
+[T1] NOP -> 응답 0, done 0 유지
+T1  NOP            tx=0xE000  rx=0x0000 (exp 0x0000)  done=0 (exp 0)  PASS
+
+[T2] COMPUTE -> done 1 (칩 생존 확인)
+T2  COMPUTE        tx=0x4000  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+
+[T3] NOP -> done 0 으로 클리어
+T3  NOP            tx=0xE000  rx=0x0000 (exp 0x0000)  done=0 (exp 0)  PASS
+
+[T4] ACC 없이 READ -> 무시
+T4  READ           tx=0x8000  rx=0x0000 (exp 0x0000)  done=0 (exp 0)  PASS
+T4  NOP            tx=0xE000  rx=0x0000 (exp 0x0000)  done=0 (exp 0)  PASS
+
+[T5] 최소 MAC: 1.0 x 1.0 x 9 = 9.0 -> 0x0051
+T5  LOAD_W[0]      tx=0x0700  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[1]      tx=0x0702  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[2]      tx=0x0704  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[3]      tx=0x0706  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[4]      tx=0x0708  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[5]      tx=0x070A  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[6]      tx=0x070C  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[7]      tx=0x070E  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_W[8]      tx=0x0710  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[0]      tx=0x2700  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[1]      tx=0x2702  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[2]      tx=0x2704  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[3]      tx=0x2706  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[4]      tx=0x2708  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[5]      tx=0x270A  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[6]      tx=0x270C  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[7]      tx=0x270E  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  LOAD_I[8]      tx=0x2710  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  ACC            tx=0x6000  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  READ           tx=0x8000  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T5  RESULT(NOP)    tx=0xE000  rx=0x0051 (exp 0x0051)  done=0 (exp 0)  PASS
+      result8=0x51 -> E4M3 9.0   (expected 0x51 -> 9.0)
+
+[T6] 원소 k 하나만 2.0 x 2.0 = 4.0 -> 0x0048 (k=0..8)
+  -- k=0
+T6k0 LOAD_W[0]      tx=0x0800  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[1]      tx=0x0002  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[2]      tx=0x0004  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[3]      tx=0x0006  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[4]      tx=0x0008  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[5]      tx=0x000A  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[6]      tx=0x000C  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[7]      tx=0x000E  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_W[8]      tx=0x0010  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[0]      tx=0x2800  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[1]      tx=0x2002  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[2]      tx=0x2004  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[3]      tx=0x2006  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[4]      tx=0x2008  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[5]      tx=0x200A  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[6]      tx=0x200C  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[7]      tx=0x200E  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 LOAD_I[8]      tx=0x2010  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 ACC            tx=0x6000  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 READ           tx=0x8000  rx=0x0000 (exp 0x0000)  done=1 (exp 1)  PASS
+T6k0 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=1
+T6k1 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[1]      tx=0x0802  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[1]      tx=0x2802  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k1 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=2
+T6k2 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[2]      tx=0x0804  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[2]      tx=0x2804  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k2 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=3
+T6k3 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[3]      tx=0x0806  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[3]      tx=0x2806  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k3 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=4
+T6k4 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[4]      tx=0x0808  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[4]      tx=0x2808  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k4 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=5
+T6k5 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[5]      tx=0x080A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[5]      tx=0x280A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k5 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=6
+T6k6 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[6]      tx=0x080C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[6]      tx=0x280C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k6 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=7
+T6k7 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[7]      tx=0x080E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_W[8]      tx=0x0010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[7]      tx=0x280E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 LOAD_I[8]      tx=0x2010  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k7 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+  -- k=8
+T6k8 LOAD_W[0]      tx=0x0000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[1]      tx=0x0002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[2]      tx=0x0004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[3]      tx=0x0006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[4]      tx=0x0008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[5]      tx=0x000A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[6]      tx=0x000C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[7]      tx=0x000E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_W[8]      tx=0x0810  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[0]      tx=0x2000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[1]      tx=0x2002  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[2]      tx=0x2004  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[3]      tx=0x2006  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[4]      tx=0x2008  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[5]      tx=0x200A  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[6]      tx=0x200C  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[7]      tx=0x200E  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 LOAD_I[8]      tx=0x2810  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 ACC            tx=0x6000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 READ           tx=0x8000  rx=0x0048 (exp   ----)  done=1 (exp 1)  PASS
+T6k8 RESULT(NOP)    tx=0xE000  rx=0x0048 (exp 0x0048)  done=0 (exp 0)  PASS
+      result8=0x48 -> E4M3 4.0   (expected 0x48 -> 4.0)
+
+========== SUMMARY (chip01, i_clk 100000 Hz) ==========
+  T0  PASS  (1/1 checks)
+  T1  PASS  (1/1 checks)
+  T2  PASS  (1/1 checks)
+  T3  PASS  (1/1 checks)
+  T4  PASS  (2/2 checks)
+  T5  PASS  (21/21 checks)
+  T6  PASS  (9/9 k PASS)
+
